@@ -13,7 +13,7 @@
 <body>
 <header class="header">
     <!--头部标题-->
-    <h1 class="header-title">文章标题</h1>
+    <h1 class="header-title">Ubuntu的Django部署（2017-05-17更新）</h1>
     <!--菜单-->
     <!--想法：HTML5游戏：一个男孩/作者水平所限-搁置-->
     <div class="center-box nav-box">
@@ -23,7 +23,6 @@
             <li><a id="open-classify" class="option">分类</a></li>
             <li><a id="open-video" class="option">影音</a></li>
             <li><a href="">标签</a></li>
-            <li><a href="">联系</a></li>
             <li><a href="">关于</a></li>
             <!--搜索-->
             <form action="" method="get" class="header-search">
@@ -64,7 +63,6 @@
             <li><a href="video.html">视频解析</a></li>
         </ul>
         <li><a href="">标签</a></li>
-        <li><a href="">联系</a></li>
         <li><a href="">关于</a></li>
 
 
@@ -92,7 +90,329 @@
 <div class="center-box main">
     <div class="main-left">
         <div class="main-article-body">
+            <img src="img/demo.jpg" alt="">
             <!--文字-->
+            <p>2017-05-17网站重写-博客地址：<a href="http://nocmt.com">http://nocmt.com</a>
+                更换环境为：Python 3.6.1 + Django 1.11.1 + MySQL 5.7.18</p>
+            <p>一周前试用了一下腾讯云的服务器，默认创建的账号不是管理员，导致上传文件失败，升级权限后却远程连接服务器都不行了，而且网速比乌龟的速度都慢，所谓的1m也只是玩笑，所以放弃使用！还是大阿里云好！这次部署的环境依旧是阿里云的Ubuntu 16.04 ，废话不多说，教程开始！</p>
+            <hr>
+            <h3>一、环境准备</h3>
+            <h5>1.更新系统：</h5>
+            <pre><code>sudo apt-get update
+sudo apt-get upgrade
+</code></pre>
+            <p>提示：安装时出现的选择项按自己实际情况选择。</p>
+            <h5>2.安装SSH：</h5>
+            <pre><code>sudo apt-get install ssh
+</code></pre>
+            <p>提示：本人的项目是通过FileZilla Client直接上传的，其实Pycharm也可以直接上传项目。
+                有兴趣的可以看看教程：<a href="http://www.yiweihy.com/knowledge/used/215-ftp-filezilla.html">FTP使用教程之Filezilla使用教程</a></p>
+            <h5>3.配置默认的Python环境：</h5>
+            <p>提示：一般默认自带python2.7+3.5，我们使用的环境是python3.6.1</p>
+            <h6>3-1.安装python-dev包：</h6>
+            <pre><code>sudo apt-get install python-dev
+</code></pre>
+            <h6>3-2.安装或升级pip ：</h6>
+            <p>安装：</p>
+            <pre><code>sudo apt-get install python-pip
+</code></pre>
+            <p>升级：</p>
+            <pre><code>sudo pip install --upgrade pip
+</code></pre>
+            <h6>3-3.更换pip源：</h6>
+            <p>提示：因为国内使用默认的pip源速度很慢，所以需要更换，在用户根目录下新建 .pip 目录，在该目录下新建pip.conf文件。</p>
+            <pre><code>sudo mkdir ~/.pip
+sudo vi ~/.pip/pip.conf
+</code></pre>
+            <p>填入：</p>
+            <pre><code>[global]
+index-url = http://mirrors.aliyun.com/pypi/simple/
+
+[install]
+trusted-host=mirrors.aliyun.com
+</code></pre>
+            <h3>二、数据库安装</h3>
+            <h5>1.安装MySQL：</h5>
+            <pre><code>sudo apt-get install mysql-server
+</code></pre>
+            <p>提示：安装过程中会提示让你设置MySQL密码 ，输入两次密码，回车即可，然后等待安装完成，见 图 2-1。
+                <img src="http://upload-images.jianshu.io/upload_images/3980526-d14c5c3830652c1a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="图 2-1"></p>
+            <p>提示：查看MySQL版本命令：</p>
+            <pre><code>mysql --version
+</code></pre>
+            <h5>2.运行数据库Mysql安全配置向导：</h5>
+            <pre><code>  sudo mysql_secure_installation
+</code></pre>
+            <hr>
+            <p>选择说明：</p>
+            <p><strong>Enter password for user root：</strong> 输入root用户密码并回车。
+                <strong>VALIDATE PASSWORD......Press y|Y for Yes, any other key for No：</strong> 是否设置验证密码，直接回车选择不。
+                <strong>Change the password for root? </strong> 是否更改root用户的密码？由于之前设置过，所以这里不更改，直接回车选择不。
+                <strong>Remove anonymous users?</strong> 是否删除匿名用户？输入y并回车。
+                <strong>Disallow root login remotely?</strong> 是否禁止root登录远程？输入y并回车。
+                <strong>Remove test database and access to it?</strong> 删除测试数据库并访问它？输入y并回车。
+                <strong>Reload privilege tables now?</strong>现在重新加载权限表？输入y并回车。</p>
+            <p>如果出现这种错误：
+                <strong>[error: 'Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)']</strong>
+                它表明你的Mysql服务，并没有开启！输入下列命令开启即可：</p>
+            <pre><code>sudo service mysql start
+</code></pre>
+            <p>sudo表明以管理员权限执行：<a href="http://faq.comsenz.com/viewnews-89">如何启动/停止/重启MySQL</a></p>
+            <hr>
+            <h5>3.配置Mysql默认字符集</h5>
+            <p>提示：此时当前目录为根目录，进入 /etc/mysql/，打开 my.cnf。</p>
+            <p>不太熟悉vi命令的同学看这里：<a href="http://www.cnblogs.com/88999660/articles/1581524.html">linux下vi命令大全</a></p>
+            <pre><code>cd /etc/mysql/
+vi my.cnf
+</code></pre>
+            <p>按一下 i 代表输入操作，填入以下代码：</p>
+            <pre><code>[client]
+port = 3306
+socket = /var/lib/mysql/mysql.sock
+default-character-set=utf8
+
+[mysqld]
+port = 3306
+socket = /var/lib/mysql/mysql.sock
+character-set-server=utf8
+
+[mysql]
+no-auto-rehash
+default-character-set=utf8
+</code></pre>
+            <p>提示：编辑完成后按一下键盘 <strong><em>ESC</em></strong> 输入<strong><em>:wq</em></strong>，代表保存退出，然后重启mysql服务使其生效：</p>
+            <pre><code>sudo service mysql restart
+</code></pre>
+            <h5>4.创建网站的数据库：</h5>
+            <p>提示：进入mysql shell:</p>
+            <pre><code>mysql -uroot -p
+</code></pre>
+            <p>提示：接下来创建数据库并指定编码方式为UTF-8（其中dataname 为数据库名称，保证与Django连接数据库名称一致，否则连接会出错）：</p>
+            <pre><code> CREATE DATABASE `dataname` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+</code></pre>
+            <p>提示：数据库操作基本命令：</p>
+            <pre><code>SHOW DATABASES; #显示所有数据库
+USE &lt;NAME&gt;;   #进入某数据库
+SHOW TABLES; #显示所有数据表
+SELECT * FROM &lt;NAME&gt;; #查询表内容
+</code></pre>
+            <p>多余的不说了，忘记的看看：<a href="http://www.jianshu.com/p/118e1c41e9f0">mysql基本操作命令汇总</a></p>
+            <p>退出命令：<strong><em>quit</em></strong>   退回根目录 ：<strong><em>cd</em></strong></p>
+            <hr>
+            <h3>三、关于Django项目静态文件的说明：</h3>
+            <p>一般在开发环境中： 即<strong>settings.py</strong>中的<strong>DEBUG = True</strong> 时 ， Django 会自动帮助我们处理静态文件，所以不用操心静态文件不加载的问题，但是在部署时，出于安全考虑，我们必须关闭<strong>DEBUG</strong>！保证自己网站的信息不泄露。只是当<strong>DEBUG</strong>关闭后，Djang就不会帮我们处理静态文件了，所以会出现样式丢失，静态文件404问题。</p>
+            <h6>1.文件说明：</h6>
+            <p><strong>MEDIA_ROOT：</strong>媒体文件收集路径，所有上传的文件存储路径。示例：图像，文件。</p>
+            <p><strong>STATIC_ROOT：</strong>静态文件收集路径， 在开发中，STATIC_ROOT什么都不做。你甚至不需要设置它。Django在每个应用程序目录（项目/Apps/static）中自动查找静态文件。当你的项目部署时，事情有所不同，Django处理静态文件能力并不强，于是在实际生产环境时它将这个任务交给了Nginx。而为什么要收集到一个文件夹内呢？这是因为如果你项目存在很多APP，每个APP下又有不同的静态文件，Nginx可不会自动寻找，它的配置文件中只能指定一个静态文件路径，于是有了这个命令：<strong>python manage.py collectstatic</strong>，后面你会了解它的用法。</p>
+            <p><strong>STATICFILES_DIRS : </strong>静态文件的额外目录，STATICFILES_DIRS用于包含要查找的其他静态文件目录。比如你自己新建的一个静态文件文件夹。</p>
+            <h6>2.部署前Django项目settings.py中的设置：</h6>
+            <p>提醒：首先DEBUG设置为False，ALLOWED_HOSTS里面填入你的域名或者IP。</p>
+            <pre><code>DEBUG = False
+ALLOWED_HOSTS = ['nocmt.com', 'www.nocmt.com']
+</code></pre>
+            <p>提醒：时区+语言+收集静态文件目录设置</p>
+            <pre><code class="lang-python">LANGUAGE_CODE = &#39;zh-Hans&#39;
+TIME_ZONE = &#39;Asia/Shanghai&#39;
+USE_I18N = True
+USE_L10N = True
+USE_TZ = False
+STATIC_ROOT = os.path.join(BASE_DIR, &#39;static&#39;)
+STATIC_URL = &#39;/static/&#39;
+STATICFILES_FINDERS = (
+  &#39;django.contrib.staticfiles.finders.FileSystemFinder&#39;,
+  &#39;django.contrib.staticfiles.finders.AppDirectoriesFinder&#39;,)
+</code></pre>
+            <hr>
+            <h3>四、安装Python 3.6.1</h3>
+            <p>提示：安装之前，我们需要给默认的Python2.7安装pymysql+Django库，因为后面会出错就是因为未安装这两个库！</p>
+            <pre><code>pip install pymysql==0.7.11
+pip install django==1.11.1
+</code></pre>
+            <h5>1.教程：</h5>
+            <p>点击这个：<a href="http://www.jianshu.com/p/d6f8cb38cf85">Ubtuntu16.04 安装 python3.6.1 教程</a></p>
+            <p>提示：如果下载速度太慢，就看上面的 FileZilla 教程，自己下载好压缩包上传上去，再解压安装。CTRL+Z退出。</p>
+            <h5>2.安装虚拟环境，我们在这里淘汰virtualenv。</h5>
+            <p>提示：因Python3+自带虚拟环境，更简单好用，所以没必要再装一个。
+                在home目录下创建名称为vcmt的虚拟环境。</p>
+            <pre><code>python3.6 -m venv /home/vcmt
+</code></pre>
+            <p>激活虚拟环境：</p>
+            <pre><code>source /home/vcmt/bin/activate
+</code></pre>
+            <p>记住退出命令为：<strong>deactivate</strong></p>
+            <h5>3.快速安装原开发环境中的所有第三方库。</h5>
+            <p>提示：首先在开发机上中的控制台输入（当然是你项目依赖的python环境下）：</p>
+            <pre><code>pip freeze &gt; requirements.txt
+</code></pre>
+            <p>这会在当前目录生成一个第三方库列表。</p>
+            <p>把生成的<strong>requirements.txt</strong>文件复制到服务器上，随便一个目录都可以。</p>
+            <p>在服务器上执行：</p>
+            <pre><code>pip install -r requirements.txt
+</code></pre>
+            <p>它会自动读取requirements.txt中的扩展库信息并在本机进行安装。</p>
+            <p>这里我们利用 FileZilla Client把文件上传上去，并且把Django项目丢上去。
+                我的目录一般在<strong>/home/</strong>下。
+                教程：<a href="https://help.aliyun.com/document_detail/25434.html">阿里云服务器ECS连接 Linux 实例</a></p>
+            <p>注意：上传项目文件后把 /项目名/app名/migrations/ 下的类似00..  的记录文件删除，有几个删除几个，但是不要删除别的文件。
+                <img src="http://upload-images.jianshu.io/upload_images/3980526-1f1e9b4e84e0a194.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="删除记录文件">
+                这是在本地进行数据同步时产生的记录文件，由于我们并不是转移的数据库，所以要删除旧的记录！</p>
+            <hr>
+            <h3>五、Django数据库配置+静态文件收集+管理员建立</h3>
+            <h6>1.进入Django项目下，同步并创建数据库，执行：</h6>
+            <pre><code>cd /home/suly/
+python manage.py makemigrations
+python manage.py migrate
+</code></pre>
+            <p>注意：如果出错了，首先检查models.py 里面是不是有什么错误，包括在第一行设置UTF-8编码方式，因为我发现它有时也会出现这种问题！再检查settings.py 关于连接部分的设置对不对，最后检查是不是3306端口没打开！一般都是这几个问题。</p>
+            <h6>2.建立后台超级用户：</h6>
+            <pre><code>python manage.py createsuperuser
+</code></pre>
+            <p>启动自带的服务器，测试是否可以正常运行！（此时settings.py 中的DEBUG = False）输入：</p>
+            <pre><code>python manage.py runserver 0.0.0.0:8000
+</code></pre>
+            <p>提醒：如果无法访问，是因为默认8000端口关闭了，打开它是在阿里云配置安全组里面，自己去找找。</p>
+            <p>而打开端口后出现：<strong>Bad Request (400)</strong>，是因为我们之前ALLOWED_HOSTS里面只添加了域名，不过如果按照教程一步一步来的，没有必要测试，我这边启动时也没报错，所以判断是完美的。不管它，CTRL+Z 强制退出！并清理8000端口相关联的进程。</p>
+            <pre><code>sudo fuser -k 8000/tcp
+</code></pre>
+            <h6>3.同步静态文件：</h6>
+            <pre><code>python manage.py collectstatic
+</code></pre>
+            <p>此时项目下的settings.py 中的STATIC_ROOT 后面的文件夹应该是'static' .</p>
+            <hr>
+            <h3>六、uWSGI的安装</h3>
+            <h6>1.安装：</h6>
+            <pre><code>sudo pip install uwsgi
+</code></pre>
+            <p>正常启动测试(suly为项目名称)：</p>
+            <pre><code>uwsgi --http :8000  --chdir /home/suly/ -w suly.wsgi
+</code></pre>
+            <p>提醒：访问地址为（<a href="http://ip:8000）同时确保你的8000端口已经开启。">http://ip:8000）同时确保你的8000端口已经开启。</a></p>
+            <p>注意：这里有些朋友访问测试时会出现502错误，这个时候控制台会详细输出日志，按照上面的提示修改代码。如果修改好以后启动没有问题，但还是访问不了，那么你需要将Django的settings.py 里面的DEBUG=True，ALLOW_HOST=['*']，保存重新开启并调试！大部分人会卡在这个步骤，如果确认你的代码没有问题，你就不要管这里了，直接往下部署，把所有文件全部弄好后，再来调试！后面我有时间也可以远程帮你！</p>
+            <p><strong>记住部署完成后你需要恢复原来的样子！</strong></p>
+            <h6>2.uWSGI的配置</h6>
+            <p>首先建立一个配置目录及文件：</p>
+            <pre><code>sudo mkdir -p /etc/uwsgi/sites
+cd /etc/uwsgi/sites
+</code></pre>
+            <p>在里面建立以自己项目名命名的配置文件：</p>
+            <pre><code>sudo vi suly.ini
+</code></pre>
+            <p>填入以下内容：你只需要改project和Base，一个项目名称，一个项目路径。</p>
+            <pre><code class="lang-python">[uwsgi]
+project = suly
+base = /home
+
+chdir = %(base)/%(project)
+module = %(project).wsgi:application
+
+master = true
+processes = 5
+
+socket = %(base)/%(project)/%(project).sock
+chmod-socket = 666
+vacuum = true
+</code></pre>
+            <p>现在建立一个自启脚本：</p>
+            <pre><code>sudo vi /etc/init/uwsgi.conf
+</code></pre>
+            <p>内容如下 setuid的值改为你的项目名：</p>
+            <pre><code class="lang-python">description &quot;uWSGI application server in Emperor mode&quot;
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+setuid suly
+setgid www-data
+
+exec /usr/local/bin/uwsgi --emperor /etc/uwsgi/sites
+</code></pre>
+            <p>最后一个问题，www-data 用户组没有创建。</p>
+            <hr>
+            <h3>七、Nginx的安装和配置</h3>
+            <h6>1.安装</h6>
+            <pre><code>sudo apt-get install nginx
+</code></pre>
+            <h2>2.创建配置文件</h2>
+            <pre><code>sudo vi /etc/nginx/sites-available/suly
+</code></pre>
+            <p>提示：填写内容如下（server_name为被解析域名，如果暂时没有域名那就填公网IP，Django项目settings.py中的，静态文件夹地址一定要填对，否则样式会出错！）：</p>
+            <p>基础版：</p>
+            <pre><code class="lang-python">server {
+
+    listen 80;
+    server_name nocmt.com;
+
+    location /static/ {
+        root /home/suly;
+        }
+    location / {
+        include         uwsgi_params;
+        uwsgi_pass      unix:/home/suly/suly.sock;
+        }
+    }
+</code></pre>
+            <p>日志版：</p>
+            <pre><code class="lang-python">server {
+    listen 80;
+    server_name nocmt.com;
+    access_log /home/suly/nginx.access.log;
+    error_log /home/suly/nginx.error.log;
+
+    location / {
+            include         uwsgi_params;
+            uwsgi_pass      unix:/home/suly/suly.sock;
+        }
+    location /static/ {
+            root /home/suly;
+        }
+    location /favico.ico  {
+        root /home/suly/static/img/favico.ico;
+        }
+}
+</code></pre>
+            <p>保存退出！</p>
+            <p><strong>多站点多域名看这里：</strong><a href="http://www.jianshu.com/p/3fe4f45729e6">Nginx多站点+301重定向的配置</a></p>
+            <p>然后链接文件：</p>
+            <pre><code>sudo ln -s /etc/nginx/sites-available/suly /etc/nginx/sites-enabled/
+</code></pre>
+            <p>检查是否有错误：</p>
+            <pre><code>sudo service nginx configtest
+</code></pre>
+            <p>提示：出现错误，那就是配置文件写错了，自己检查一下，没有就直接启动！
+                <img src="http://upload-images.jianshu.io/upload_images/3980526-ee1feb0cdabbc0c0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提示ok才是正确的">
+                重启命令：</p>
+            <pre><code>sudo service nginx restart
+</code></pre>
+            <p>启动uwsgi ：</p>
+            <pre><code>uwsgi /etc/uwsgi/sites/suly.ini -d /home/suly/suly.log
+</code></pre>
+            <p>访问你的网站，试试看！如果有问题可以评论或者简信我！</p>
+            <p>我在后台提交数据时总是出现500错误，于是我把Debug开启，得到的错误消息如下：</p>
+            <p><img src="http://upload-images.jianshu.io/upload_images/3980526-e9b3b9f4ebcd0c19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="默认还是调用的2.7，然后出现编码问题"></p>
+            <p><strong>我怎么解决的：</strong>
+                思路：我们都知道python2.7默认编码方式是ascil，而中文是需要utf-8支持的，于是我们只要修改python默认的字符编码为utf-8就可以了，经过查询，我得到ubuntu的python2.7安装目录 为：<strong>/usr/lib/python2.7</strong>，在它的目录下打开一个叫<strong>sitecustomize.py</strong>的文件，如果没有就建立一个，它的作用就是在python启动时就会执行一次该脚本。我们在最前面写入下面几行代码（里面会有几行代码，不要管它）：</p>
+            <pre><code class="lang-python">import sys
+reload(sys)
+sys.setdefaultencoding(&#39;utf-8&#39;)
+</code></pre>
+            <p><strong>测试，命令行输入python2.7，启动shell,输入：</strong></p>
+            <pre><code>import sys
+sys.getdefaultencoding()
+</code></pre>
+            <p>返回'utf-8'！退出shell重启uwsgi，没问题了。</p>
+            <hr>
+            <p>参考文章：</p>
+            <p>1.<a href="https://segmentfault.com/a/1190000008507042">基于Django框架的网站部署</a></p>
+            <p>2.<a href="http://www.jianshu.com/p/d5276a217cfe">Django+Nginx+uwsgi部署</a></p>
+            <p>3.<a href="https://segmentfault.com/a/1190000007912666">在 Ubuntu 16.04 LTS 上安装 Python 3.6.0</a></p>
+            <p>4.<a href="http://www.ha97.com/5359.html">Linux下MySQL 5.5/5.6的修改字符集编码为UTF8</a></p>
+            <p>5.<a href="http://stackoverflow.com/questions/24022558/differences-between-staticfiles-dir-static-root-and-media-root">STATICFILES_DIR，STATIC_ROOT和MEDIA_ROOT之间的差异</a></p>
+            <p>6.<a href="http://python.jobbole.com/86688/">Ubuntu+Django+Nginx+uWSGI+Mysql搭建Python Web服务器</a></p>
+            <p>7.<a href="http://www.python88.com/topic/101/">五步教你实现使用Nginx+uWSGI+Django方法部署Django程序(上)</a></p>
+            <p>8.<a href="http://www.python88.com/topic/124/">五步教你实现使用Nginx+uWSGI+Django方法部署Django程序(下)</a></p>
+            <p>9.<a href="http://www.jianshu.com/p/651e2691863e">Django + uwsgi + nginx + bootstrap 创建自己的博客 -- 13.部署</a></p>
+            <p>10.<a href="http://www.cnblogs.com/yestreenstars/p/5949037.html">CentOS+Apache+mod_wsgi+Python+Django - 昨、夜星辰 - 博客园</a></p>
+            <p>......</p>
         </div>
     </div>
 

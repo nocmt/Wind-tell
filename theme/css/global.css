@@ -192,37 +192,6 @@ input, button {
         text-align: center;
         border-radius: 3px;
         margin: 6px; }
-    .main .main-left .contact-box {
-      width: 100%;
-      background-color: white;
-      border-radius: 3px; }
-      .main .main-left .contact-box form {
-        padding: 10px 0;
-        width: 100%;
-        margin: 0 auto;
-        color: #000;
-        text-align: center; }
-      .main .main-left .contact-box input {
-        width: 45.5%;
-        height: 40px;
-        margin: 0;
-        font-size: 0.9rem;
-        background-color: #f6f6f6;
-        border: 1px solid #e0e0e0;
-        border-radius: 3px;
-        padding: 3px 8px; }
-      .main .main-left .contact-box textarea {
-        padding: 3px 8px;
-        font-size: 0.9rem;
-        margin: 20px 0;
-        width: 94%;
-        height: 300px;
-        background-color: #f6f6f6;
-        border-radius: 3px; }
-      .main .main-left .contact-box #contactSubmit:hover {
-        color: #FFF;
-        background: #1B1B1B;
-        border-color: #1B1B1B; }
   .main .main-right {
     display: inline-block;
     width: 35%;
@@ -234,7 +203,8 @@ input, button {
       border-radius: 3px;
       margin-bottom: 20px; }
       .main .main-right .main-author .author-bag {
-        height: 50%; }
+        height: 50%;
+        border-radius: 3px 3px 0 0; }
       .main .main-right .main-author .author-inf {
         height: 50%;
         position: relative; }
@@ -252,6 +222,7 @@ input, button {
           top: -40px; }
           .main .main-right .main-author .author-inf .author-inf-img img {
             display: block;
+            -o-object-fit: cover;
             object-fit: cover;
             width: 80px;
             height: 80px;

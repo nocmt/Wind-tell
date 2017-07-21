@@ -20,6 +20,7 @@ body {
 }
 
 .header {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
   box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
   .header-title {
     color: #4C566C;
@@ -33,12 +34,16 @@ body {
           &:link, &:visited {
             color: #3F3038;
             @include textShow;
+            -webkit-transition: border-bottom 1s;
+            -o-transition: border-bottom 1s;
             transition: border-bottom 1s;
           }
 
           &:hover {
             margin-bottom: 0;
             border-bottom: 1px solid #2A363B;
+            -webkit-transition: border-bottom 1s;
+            -o-transition: border-bottom 1s;
             transition: border-bottom 1s;
           }
 
@@ -98,7 +103,6 @@ body {
   a {
     border: 1px solid #e0e0e0;
     color: #3F3038;
-    background-color: rgba(255, 255, 255, 0.97);
     &:hover {
       color: #FFF;
       background: #1B1B1B;
@@ -112,9 +116,11 @@ body {
   .main-left {
     .main-article {
       background-color: white;
+      -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
       box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
 
       &:hover {
+        -webkit-box-shadow: 2px 6px 10px rgba(36, 37, 38, 0.13);
         box-shadow: 2px 6px 10px rgba(36, 37, 38, 0.13);
       }
       .article-title {
@@ -170,15 +176,20 @@ body {
 
   .main-right {
     .main-author {
+      -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
       box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
       background: white;
       .author-bag {
+        background-image: -webkit-gradient(linear, left top, right top, from(#fa709a), to(#fee140));
+        background-image: -webkit-linear-gradient(left, #fa709a 0%, #fee140 100%);
+        background-image: -o-linear-gradient(left, #fa709a 0%, #fee140 100%);
         background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
       }
     }
 
     .main-template {
       background-color: white;
+      -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
       box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
       .template-box {
         .template-content {

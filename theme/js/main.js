@@ -10,7 +10,7 @@ $(document).ready(function () {
         });
         if (InfText.text() === "赞助作者（微信）") {
             InfText.text("一语道不尽，缄默宁无言");
-            $("#weixin").fadeToggle();
+            $("#weixin").fadeToggle(300);
         } else {
             InfText.text("赞助作者（微信）");
             $("#weixin").fadeToggle(1500);

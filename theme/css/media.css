@@ -2,6 +2,9 @@
   .center-box {
     width: 90%; }
 
+  .main-article-body {
+    width: 100% !important; }
+
   .btn-top {
     right: 10px; }
 
@@ -49,6 +52,7 @@
     display: none; } }
 @media (max-width: 780px) {
   .header .header-title {
-    padding: 60px 0; } }
+    padding: 80px 0;
+    font-size: 1.5rem; } }
 
 /*# sourceMappingURL=media.css.map */

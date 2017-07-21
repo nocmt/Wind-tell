@@ -3,14 +3,16 @@
 }
 .main-article-body {
     font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
     border-radius: 3px;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1);
     box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1);
-    background: white;
     padding: 12px;
 }
 .main-article-body code {
     word-break: break-all;
+    border-radius: 3px;
 }
 .main-article-body img{
     width: 100%;
