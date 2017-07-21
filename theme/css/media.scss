@@ -1,0 +1,85 @@
+@import "include-media";
+
+@include media('<=1480px') {
+  .center-box {
+    width: 90%;
+  }
+  .btn-top {
+    right: 10px;
+  }
+  .main .main-right .main-author .author-inf .weixin {
+    width: 55%;
+    left: 22%;
+  }
+}
+
+@include media('<=980px') {
+  .center-box {
+    width: 96%;
+  }
+
+  .btn-top {
+    right: 8px;
+    bottom: 110px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  .header {
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .nav-box {
+      position: fixed;
+      top: 0;
+      background: white;
+      width: 100%;
+      box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1);
+      .header-nav {
+      }
+
+      .header-nav-pc {
+        display: none;
+      }
+      .header-nav-mobile {
+        display: block !important;
+      }
+
+    }
+
+    .header-title {
+      padding: 100px 0;
+    }
+  }
+  .main {
+    .main-left {
+      width: 100%;
+      margin-right: 0;
+      .page-add {
+        cursor: pointer;
+        width: 100% !important;
+        display: inline-block !important;
+        text-align: center;
+      }
+      .page-none {
+        display: none !important;
+      }
+    }
+    .main-right {
+      display: none;
+    }
+  }
+}
+
+@include media('<=780px') {
+  .header .header-title {
+    padding: 60px 0;
+  }
+
+
+}
+
+@include media('<480px') {
+
+
+}

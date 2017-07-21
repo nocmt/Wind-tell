@@ -1,0 +1,132 @@
+body {
+  background: #f6f6f6; }
+
+.header {
+  box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1); }
+  .header .header-title {
+    color: #4C566C;
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7); }
+  .header .nav-box {
+    color: white; }
+    .header .nav-box .header-nav li a:link, .header .nav-box .header-nav li a:visited {
+      color: #3F3038;
+      text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7);
+      transition: border-bottom 1s; }
+    .header .nav-box .header-nav li a:hover {
+      margin-bottom: 0;
+      border-bottom: 1px solid #2A363B;
+      transition: border-bottom 1s; }
+    .header .nav-box .header-nav .option {
+      color: #3F3038; }
+    .header .nav-box .header-nav .header-search {
+      background: none; }
+      .header .nav-box .header-nav .header-search input {
+        background: transparent; }
+      .header .nav-box .header-nav .header-search button {
+        background: none;
+        color: #252626; }
+    .header .nav-box .header-nav-mobile .bars-btn {
+      color: #3F3038; }
+  .header .mobile-sidebar {
+    background-color: white; }
+    .header .mobile-sidebar li {
+      border-bottom: 1px solid gainsboro; }
+      .header .mobile-sidebar li a {
+        color: #3F3038;
+        text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7); }
+        .header .mobile-sidebar li a:link, .header .mobile-sidebar li a:visited {
+          color: #3F3038; }
+        .header .mobile-sidebar li a:hover {
+          color: #0D3446; }
+    .header .mobile-sidebar .mobile-sidebar-2 {
+      background-color: #F9F9F9; }
+      .header .mobile-sidebar .mobile-sidebar-2 li {
+        border-bottom: 1px solid #D8DFE2; }
+
+.bar-box a {
+  border: 1px solid #e0e0e0;
+  color: #3F3038;
+  background-color: rgba(255, 255, 255, 0.97); }
+  .bar-box a:hover {
+    color: #FFF;
+    background: #1B1B1B;
+    border-color: #1B1B1B; }
+
+.main .main-left .main-article {
+  background-color: white;
+  box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1); }
+  .main .main-left .main-article:hover {
+    box-shadow: 2px 6px 10px rgba(36, 37, 38, 0.13); }
+  .main .main-left .main-article .article-title {
+    text-shadow: 0 1px 0 #fff; }
+    .main .main-left .main-article .article-title:link, .main .main-left .main-article .article-title:visited {
+      color: #3F3038; }
+    .main .main-left .main-article .article-title:hover {
+      color: #0D3446; }
+  .main .main-left .main-article .article-inf {
+    text-shadow: 0 1px 0 #fff;
+    background: #f6f6f6; }
+    .main .main-left .main-article .article-inf li {
+      color: #666; }
+      .main .main-left .main-article .article-inf li span a:link, .main .main-left .main-article .article-inf li span a:visited {
+        color: #666; }
+      .main .main-left .main-article .article-inf li span a:hover {
+        color: #0D3446; }
+.main .main-left .article-page a:link, .main .main-left .article-page a:visited {
+  text-shadow: 0 1px 0 #fff;
+  color: #3F3038; }
+.main .main-left .article-page a:hover {
+  color: #0D3446; }
+.main .main-left .article-page .page-add {
+  border: 1px solid gainsboro; }
+.main .main-left .tags-box a {
+  border: 1px solid #e0e0e0;
+  color: #3F3038;
+  background-color: rgba(255, 255, 255, 0.97); }
+  .main .main-left .tags-box a:hover {
+    color: #FFF;
+    background: #1B1B1B;
+    border-color: #1B1B1B; }
+.main .main-right .main-author {
+  box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1);
+  background: white; }
+  .main .main-right .main-author .author-bag {
+    background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%); }
+.main .main-right .main-template {
+  background-color: white;
+  box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1); }
+  .main .main-right .main-template .template-box .template-content {
+    color: #252626; }
+    .main .main-right .main-template .template-box .template-content a {
+      border: 1px solid #e0e0e0;
+      color: #3F3038;
+      background-color: rgba(255, 255, 255, 0.97); }
+  .main .main-right .main-template .template-box .t-tags a:hover {
+    color: #FFF;
+    background: #1B1B1B;
+    border-color: #1B1B1B; }
+  .main .main-right .main-template .template-box .t-links a {
+    border: 1px solid #428bca;
+    color: #666; }
+    .main .main-right .main-template .template-box .t-links a:hover {
+      color: #FFF;
+      background: #141829;
+      border-color: #141829; }
+  .main .main-right .main-template .template-box .t-films a p:hover {
+    color: #0D3446; }
+
+.footer {
+  background: #222222;
+  color: white;
+  /* border-top: 1px solid gainsboro; */ }
+
+.footer-box a:link, .footer-box a:visited {
+  color: white; }
+.footer-box a:hover {
+  color: #FFFB85; }
+
+.btn-top {
+  color: white;
+  background-color: #252626; }
+
+/*# sourceMappingURL=style.css.map */

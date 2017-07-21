@@ -1,0 +1,248 @@
+//已固定文字嵌入效果
+@mixin textShow {
+  text-shadow: 0px 1px 0px rgba(255, 255, 255, .7);
+}
+
+@mixin text-a {
+  &:link, &:visited {
+    color: #3F3038;
+  }
+  &:hover {
+    color: #0D3446;
+  }
+}
+
+//背景色
+$background: #f6f6f6;
+
+body {
+  background: $background;
+}
+
+.header {
+  box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
+  .header-title {
+    color: #4C566C;
+    @include textShow;
+  }
+  .nav-box {
+    color: white;
+    .header-nav {
+      li {
+        a {
+          &:link, &:visited {
+            color: #3F3038;
+            @include textShow;
+            transition: border-bottom 1s;
+          }
+
+          &:hover {
+            margin-bottom: 0;
+            border-bottom: 1px solid #2A363B;
+            transition: border-bottom 1s;
+          }
+
+        }
+      }
+      .option {
+        color: #3F3038;
+      }
+      .header-search {
+        background: none;
+        input {
+          background: transparent;
+        }
+        button {
+          background: none;
+          color: #252626;
+        }
+      }
+
+    }
+
+    .header-nav-mobile {
+      .bars-btn {
+        color: #3F3038;
+      }
+    }
+  }
+
+  .mobile-sidebar {
+    background-color: white;
+    li {
+      border-bottom: 1px solid gainsboro;
+      a {
+        color: #3F3038;
+        text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7);
+        &:link, &:visited {
+          color: #3F3038;
+        }
+        &:hover {
+          color: #0D3446;
+        }
+      }
+    }
+
+    .mobile-sidebar-2 {
+      background-color: #F9F9F9;
+      li {
+        border-bottom: 1px solid #D8DFE2;
+      }
+    }
+  }
+
+}
+
+//叫什么？不知道
+.bar-box {
+  a {
+    border: 1px solid #e0e0e0;
+    color: #3F3038;
+    background-color: rgba(255, 255, 255, 0.97);
+    &:hover {
+      color: #FFF;
+      background: #1B1B1B;
+      border-color: #1B1B1B;
+    }
+  }
+}
+
+//内容
+.main {
+  .main-left {
+    .main-article {
+      background-color: white;
+      box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
+
+      &:hover {
+        box-shadow: 2px 6px 10px rgba(36, 37, 38, 0.13);
+      }
+      .article-title {
+        text-shadow: 0 1px 0 #fff;
+        @include text-a;
+      }
+      .article-inf {
+        text-shadow: 0 1px 0 #fff;
+        background: $background;
+        li {
+          color: #666;
+          span {
+            a {
+              &:link, &:visited {
+                color: #666;
+              }
+              &:hover {
+                color: #0D3446;
+              }
+            }
+          }
+        }
+      }
+    }
+    .article-page {
+      a {
+        &:link, &:visited {
+          text-shadow: 0 1px 0 #fff;
+          color: #3F3038;
+        }
+        &:hover {
+          color: #0D3446;
+        }
+      }
+      .page-add {
+        border: 1px solid gainsboro;
+      }
+    }
+    .tags-box{
+      a{
+        border: 1px solid #e0e0e0;
+        color: #3F3038;
+        background-color: rgba(255, 255, 255, 0.97);
+        &:hover {
+          color: #FFF;
+          background: #1B1B1B;
+          border-color: #1B1B1B;
+        }
+      }
+
+    }
+  }
+
+  .main-right {
+    .main-author {
+      box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
+      background: white;
+      .author-bag {
+        background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+      }
+    }
+
+    .main-template {
+      background-color: white;
+      box-shadow: 0 2px 5px 0 rgba(146, 146, 146, .1);
+      .template-box {
+        .template-content {
+          color: #252626;
+          a {
+            border: 1px solid #e0e0e0;
+            color: #3F3038;
+            background-color: rgba(255, 255, 255, .97);
+          }
+        }
+        .t-tags {
+          a {
+            &:hover {
+              color: #FFF;
+              background: #1B1B1B;
+              border-color: #1B1B1B;
+            }
+          }
+        }
+        .t-links {
+          a {
+            border: 1px solid #428bca;
+            color: #666;
+            &:hover {
+              color: #FFF;
+              background: #141829;
+              border-color: #141829;
+            }
+          }
+        }
+        .t-films {
+          a {
+            p {
+              &:hover {
+                color: #0D3446;
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+}
+
+.footer {
+  background: #222222;
+  color: white;
+  /* border-top: 1px solid gainsboro; */
+}
+
+.footer-box {
+  a {
+    &:link, &:visited {
+      color: white;
+    }
+    &:hover {
+      color: #FFFB85;
+    }
+  }
+}
+
+//回到顶部按钮
+.btn-top {
+  color: white;
+  background-color: #252626;
+}

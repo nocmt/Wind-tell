@@ -1,0 +1,36 @@
+.main-article{
+    background: white;
+}
+.main-article-body {
+    font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    width: 100%;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px 0 rgba(146, 146, 146, 0.1);
+    background: white;
+    padding: 12px;
+}
+.main-article-body code {
+    word-break: break-all;
+}
+.main-article-body img{
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+}
+.main-article-body p{
+    color: #2f2f2f;
+    word-break: break-all;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+}
+.main-article-body a:link,.main-article-body a:visited{
+    border-bottom: 1px solid #539092;
+    color: #539092;
+}
+.main-article-body a:hover{
+    color: #2E3B3E;
+}
+.main .main-left{
+    width: 100%;
+}

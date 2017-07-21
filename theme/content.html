@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>文章标题 - 文章| 缄默博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="header">
+    <!--头部标题-->
+    <h1 class="header-title">文章标题</h1>
+    <!--菜单-->
+    <!--想法：HTML5游戏：一个男孩/作者水平所限-搁置-->
+    <div class="center-box nav-box">
+        <ul class="header-nav header-nav-pc">
+            <li><a href="index.html">主页</a></li>
+            <!--尝试实现悬浮选项：作者水平所限-搁置/已实现：曲线救国-->
+            <li><a id="open-classify" class="option">分类</a></li>
+            <li><a id="open-video" class="option">影音</a></li>
+            <li><a href="">标签</a></li>
+            <li><a href="">联系</a></li>
+            <li><a href="">关于</a></li>
+            <!--搜索-->
+            <form action="" method="get" class="header-search">
+                <input type="text" placeholder="请输入您要搜索的内容" maxlength="20" autocomplete="on" required>
+                <button type="submit"><span><i class=" fa fa-search"></i></span></button>
+            </form>
+        </ul>
+
+        <ul class="header-nav header-nav-mobile">
+            <li><span id="bars-btn" class="bars-btn"><i class="fa fa-bars" aria-hidden="true"></i></span></li>
+            <!--搜索-->
+            <form action="" method="get" class="header-search">
+                <input type="text" placeholder="请输入您要搜索的内容" maxlength="20" autocomplete="on" required>
+                <button type="submit"><span><i class=" fa fa-search"></i></span></button>
+            </form>
+        </ul>
+
+    </div>
+
+
+    <!--移动端侧边栏-->
+    <ul id="mobile-sidebar" class="mobile-sidebar">
+        <li><a href="index.html">主页</a></li>
+        <li id="msc-btn"><a>分类</a></li>
+        <ul id="msc" class="mobile-sidebar-2">
+            <li><a href="">生活感悟</a></li>
+            <li><a href="">学习心得</a></li>
+            <li><a href="">软件分享</a></li>
+            <li><a href="">心情随笔</a></li>
+        </ul>
+
+        <li id="msv-btn"><a>影音</a></li>
+        <ul id="msv" class="mobile-sidebar-2">
+            <li><a href="video.html">恐怖惊悚</a></li>
+            <li><a href="video.html">烧脑悬疑</a></li>
+            <li><a href="video.html">科幻电影</a></li>
+            <li><a href="video.html">流行音乐</a></li>
+            <li><a href="video.html">视频解析</a></li>
+        </ul>
+        <li><a href="">标签</a></li>
+        <li><a href="">联系</a></li>
+        <li><a href="">关于</a></li>
+
+
+    </ul>
+</header>
+
+<div class="nbar" style="width: 100%">
+    <div id="classify-s" class="center-box bar-box">
+        <a href="index.html">生活感悟</a>
+        <a href="index.html">学习心得</a>
+        <a href="index.html">软件分享</a>
+        <a href="index.html">心情随笔</a>
+    </div>
+    <div id="video-s" class="center-box bar-box">
+        <a href="video.html">恐怖惊悚</a>
+        <a href="video.html">烧脑悬疑</a>
+        <a href="video.html">科幻电影</a>
+        <a href="video.html">流行音乐</a>
+        <a href="video.html">奇葩短片</a>
+        <a href="video.html">视频解析</a>
+    </div>
+</div>
+<!--文字样式-->
+<link rel="stylesheet" href="css/content.css">
+<div class="center-box main">
+    <div class="main-left">
+        <div class="main-article-body">
+            <!--文字-->
+        </div>
+    </div>
+
+    <!--解决父级元素塌陷问题-->
+    <div style="clear: both"></div>
+</div>
+
+<footer class="footer">
+    <div class="center-box">
+        <div class="footer-box" style="margin-bottom: 5px">
+            <a href="index.html">原创主题：风诉</a>
+        </div>
+        <div class="footer-box">
+            Copyright © 2017
+            <a href="index.html">Nocmt</a>
+            <a href="http://www.miitbeian.gov.cn">湘ICP备17004757号-1</a>
+            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43012102000177">湘公网安备43012102000177号</a>
+            <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">
+                <img alt="知识共享许可协议" style="border-width:0" src="img/xieyi.png" width="65px" height="auto">
+            </a>
+        </div>
+    </div>
+</footer>
+
+<button id="btn-top" class="btn-top" type="button" title="回到顶部"><span><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+</button>
+<link href="https://cdn.bootcss.com/highlight.js/9.6.0/styles/atelier-lakeside-dark.min.css" rel="stylesheet"/>
+<script src="https://cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cdn.bootcss.com/highlightjs-line-numbers.js/1.1.0/highlightjs-line-numbers.min.js"></script>
+<script>hljs.initLineNumbersOnLoad();</script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
