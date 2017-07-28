@@ -13,9 +13,10 @@
 .main-article-body code {
     word-break: break-all;
     border-radius: 3px;
+    -webkit-overflow-scrolling: touch;
 }
 .main-article-body img{
-    width: 100%;
+    max-width: 100%;
     height: auto;
     border-radius: 3px;
 }

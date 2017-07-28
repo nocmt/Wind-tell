@@ -1,5 +1,7 @@
-body {
-  margin: 0; }
+html, body {
+  margin: 0;
+  overflow: hidden;
+  overflow-y: auto; }
 
 a {
   text-decoration: none; }
